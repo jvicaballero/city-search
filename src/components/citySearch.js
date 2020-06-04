@@ -7,10 +7,8 @@ class CitySearch extends Component{
     {
      super(props);
         this.state = {
-           
+            cityName: '',
             zipcode : null,
-            cityName: "",
-
          };
     }
 
@@ -23,7 +21,7 @@ class CitySearch extends Component{
             
         });
 
-        console.log(this.state.cityName);
+        //console.log(this.state.cityName);
     }
 
     componentDidMount(){
