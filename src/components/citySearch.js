@@ -53,19 +53,29 @@ class CitySearch extends Component{
         return(
             
             <div>
+            <div>
+                <h1>Type in a City</h1>
                 {/*<p>{this.state.zipcode && this.state.zipcode.text}</p>*/}
                 <input type="text" placeholder="Type in a city. Ex)Akron" onChange={this.handleChange}/>
                
-                <div>
-
-                <h1>zipcodes under that city:</h1>
-
-                <ul>
-                    {items}
-                </ul>
-
-                </div>
+               
             </div>
+
+            
+            <div>
+
+            <h1>Zipcodes under that city:</h1>
+
+            <ul>
+                {items}
+            </ul>
+
+            </div>
+            
+            
+            </div>
+
+            
 
             
         );
