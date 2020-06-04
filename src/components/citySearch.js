@@ -7,12 +7,27 @@ class CitySearch extends Component{
     {
      super(props);
         this.state = {
-            zipcode : null
+           
+            zipcode : null,
+            cityName: "",
+
          };
     }
 
+
+    nameGiven = this.state.cityName.toUpperCase();
+    
+    handleChange = event => {
+        this.setState({
+            cityName: event.target.cityName,
+            
+        });
+
+        console.log(this.state.cityName);
+    }
+
     componentDidMount(){
-        axios.get('http://ctp-zip-api.herokuapp.com').then((response) => {
+        axios.get('http://ctp-zip-api.herokuapp.com/' + this.nameGiven).then((response) => {
             const data = response.data;
             console.log(data)
             const newZipObj = {
@@ -33,11 +48,15 @@ class CitySearch extends Component{
         return(
             <div>
                 <p>{this.state.zipcode && this.state.zipcode.text}</p>
-                <input type="text" placeholder="Type in a city. Ex)Akron"/>
-                <button type="submit">Submit</button>
+                <input type="text" placeholder="Type in a city. Ex)Akron" onChange={this.handleChange}/>
+                {/*<button type="submit" value="submit">Submit</button>8*/}
+               
             </div>
         );
+        
     }
+
+    
 }
 
 export default CitySearch
