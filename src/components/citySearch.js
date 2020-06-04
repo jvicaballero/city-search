@@ -50,35 +50,48 @@ class CitySearch extends Component{
         const items = this.state.zipcode.map(function(items){
             return <li>{items}</li>;
         });
-        return(
+
+        let display;
+
+        if(this.state.zipcode.length > 0){
+            return( 
+                <div>
+
+                <h1>Type in a City</h1>
+                {/*<p>{this.state.zipcode && this.state.zipcode.text}</p>*/}
+                <input type="text" placeholder="Type in a city. Ex)Akron" onChange={this.handleChange}/>
+
+                <h1>Zipcodes under that city:</h1>
+    
+                <ul>
+                    {items}
+                </ul>
+    
+                </div>
+            )}
+        
+
+        else{
+
+            return(
             
             <div>
             <div>
                 <h1>Type in a City</h1>
                 {/*<p>{this.state.zipcode && this.state.zipcode.text}</p>*/}
                 <input type="text" placeholder="Type in a city. Ex)Akron" onChange={this.handleChange}/>
+                <p>No Zipcodes currently displayed</p>
                
                
             </div>
 
-            
-            <div>
-
-            <h1>Zipcodes under that city:</h1>
-
-            <ul>
-                {items}
-            </ul>
-
-            </div>
-            
-            
-            </div>
+            </div>);
+        }
 
             
 
             
-        );
+        
         
     }
 
