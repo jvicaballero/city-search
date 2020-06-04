@@ -7,32 +7,37 @@ class CitySearch extends Component{
     {
      super(props);
         this.state = {
-            cityName: '',
-            zipcode : null,
+            //cityName: '',
+            //zipcode : null,
+            zipcode: [],
          };
     }
 
-
-    nameGiven = this.state.cityName.toUpperCase();
+    //nameGiven = this.state.cityName.toUpperCase();
     
     handleChange = event => {
-        this.setState({
-            cityName: event.target.cityName,
-            
-        });
+        const input = event.target.value;
+        let cityName = input.toUpperCase();
 
-        //console.log(this.state.cityName);
+        console.log(this.state.cityName);
+        this.componentDidMount(cityName);
     }
 
-    componentDidMount(){
-        axios.get('http://ctp-zip-api.herokuapp.com/' + this.nameGiven).then((response) => {
+    componentDidMount(nameGiven){
+        axios.get('http://ctp-zip-api.herokuapp.com/city/' + nameGiven).then((response) => {
             const data = response.data;
+
             console.log(data)
+            /*
             const newZipObj = {
                 text: data.test,
             }
 
-            this.setState({zipcode: newZipObj});
+            this.setState({zipcode: newZipObj});*/
+
+            this.setState({zipcode: data})
+
+
         })
             .catch((error => console.log(error)));
 
@@ -40,16 +45,29 @@ class CitySearch extends Component{
     }
 
     
-
     render()
     {
+        const items = this.state.zipcode.map(function(items){
+            return <li>{items}</li>;
+        });
         return(
+            
             <div>
-                <p>{this.state.zipcode && this.state.zipcode.text}</p>
+                {/*<p>{this.state.zipcode && this.state.zipcode.text}</p>*/}
                 <input type="text" placeholder="Type in a city. Ex)Akron" onChange={this.handleChange}/>
-                {/*<button type="submit" value="submit">Submit</button>8*/}
                
+                <div>
+
+                <h1>zipcodes under that city:</h1>
+
+                <ul>
+                    {items}
+                </ul>
+
+                </div>
             </div>
+
+            
         );
         
     }
